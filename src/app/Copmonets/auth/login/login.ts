@@ -16,6 +16,7 @@ export class Login implements OnInit {
   passwords: string = '';
   isloading: boolean = false;
   errormsg: string = '';
+showPassword: any;
 
   constructor(private auth: Auth, private router: Router) {}
 

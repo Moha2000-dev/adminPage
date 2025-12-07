@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div
+  class="min-h-screen bg-linear-to-br from-indigo-100 via-purple-50 to-pink-100 grid place-items-center p-4"
+>
+  <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Welcome Back</h2>
+    <form (ngSubmit)="submit()">
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-2" for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          [(ngModel)]="usernames"
+          name="username"
+          required
+          class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+        />
+      </div>
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-2" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="passwords"
+          name="password"
+          required
+          class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+        />
+      </div>
+      <button
+        type="submit"
+        [disabled]="isloading"
+        class="w-full bg-linear-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition duration-200 shadow-lg disabled:opacity-50 disabled:transform-none"
+      >
+        {{ isloading ? 'Logging in...' : 'Login' }}
+      </button>
+      <div
+        *ngIf="errormsg"
+        class="mt-6 text-red-600 text-center bg-red-50 py-3 px-4 rounded-xl border border-red-200"
+      >
+        {{ errormsg }}
+      </div>
+    </form>
+  </div>
+</div>
