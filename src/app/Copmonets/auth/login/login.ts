@@ -24,6 +24,7 @@ showPassword: any;
 
   submit(): void {
     this.isloading = true;
+    console.log(this.usernames, this.passwords);
     const data = { username: this.usernames, password: this.passwords };
     this.auth.login(data).subscribe(
       (res) => {
