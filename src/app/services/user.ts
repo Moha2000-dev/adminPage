@@ -18,5 +18,13 @@ export class User {
       })
     );
   }
-  
+  //delete user by id
+  deleteUser(id: number) {
+    return this.http.delete(`${this.base}/${id}`).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  }
 }
