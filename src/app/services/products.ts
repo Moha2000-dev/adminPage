@@ -1,8 +1,30 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Products {
-  
+  private base = 'https://fakestoreapi.com/products';
+  constructor(private http: HttpClient) {}
+
+  getProducts() {
+    return this.http.get(this.base).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  }
+
+  //delete product by id
+  deleteProduct(id: number) {
+    return this.http.delete(`${this.base}/${id}`).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  } 
 }
