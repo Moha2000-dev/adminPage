@@ -26,5 +26,5 @@ export class Products {
         throw 'Error in source. Details: ' + error;
       })
     );
-  } 
+  }
 }
