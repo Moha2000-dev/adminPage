@@ -10,6 +10,12 @@ import id from '@angular/common/locales/id';
   styleUrl: './user.css',
 })
 export class User {
+  editUser(_t22: any) {
+    throw new Error('Method not implemented.');
+  }
+  addUser() {
+    throw new Error('Method not implemented.');
+  }
   users = signal<any[]>([]);
   isloading = signal<boolean>(false); //loading state
   userName: any;

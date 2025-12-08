@@ -18,7 +18,7 @@ export class User {
       })
     );
   }
-  //delete user by id
+  //delete user by 
   deleteUser(id: number) {
     return this.http.delete(`${this.base}/${id}`).pipe(
       map((data) => data),
