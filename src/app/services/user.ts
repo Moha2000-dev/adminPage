@@ -26,4 +26,23 @@ export class User {
       })
     );
   }
+
+  //edit user
+  editUser(id: number, userData: any) {
+    return this.http.put(`${this.base}/${id}`, userData).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  }
+  //add  user
+  addUser(userData: any) {
+    return this.http.post(this.base, userData).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  }
 }

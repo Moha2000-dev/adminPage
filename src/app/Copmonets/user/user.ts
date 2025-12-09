@@ -10,12 +10,7 @@ import { Console } from 'console';
   styleUrl: './user.css',
 })
 export class User {
-  editUser(_t22: any) {
-    throw new Error('Method not implemented.');
-  }
-  addUser() {
-    throw new Error('Method not implemented.');
-  }
+  
   users = signal<any[]>([]);
   isloading = signal<boolean>(false); //loading state
   userName: any;
@@ -56,5 +51,35 @@ export class User {
         }
       );
     }
+  }
+  //edit user
+  editUser(id: number, userData: any) {
+    this.isloading.set(true);
+    this.userService.editUser(id, userData).subscribe(
+      (res: any) => {
+        console.log('Edited user response:', res);
+        this.loadUsers(); 
+        this.isloading.set(false);
+      },
+      (error) => {
+        console.error('Error editing user:', error);
+        this.isloading.set(false);
+      }
+    );
+  }
+  //add user
+  addUser(userData: any) {
+    this.isloading.set(true);
+    this.userService.addUser(userData).subscribe(
+      (res: any) => {
+        console.log('Added user response:', res);
+        this.loadUsers(); 
+        this.isloading.set(false);
+      },
+      (error) => {
+        console.error('Error adding user:', error);
+        this.isloading.set(false);
+      }
+    );  
   }
 }
