@@ -174,6 +174,7 @@
       <div
         *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
         class="text-red-500 text-sm"
+
       >Please enter a valid email address.</div
 
           >
@@ -184,6 +185,10 @@
         placeholder="password"
         class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
       />
+      <div
+        *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+        class="text-red-500 text-sm"
+      >Please enter a valid password.</div>
 
       <div class="flex justify-end gap-2">
         <button

@@ -29,14 +29,20 @@ export class User {
           // Validators.required,
            Validators.required,
            Validators.maxLength(50) // Example of another validator
+            , Validators.email
           
 
           
         ]
       ],
       
-      username: [''],
-      password: [''],
+      username: ['', [Validators.required,
+        Validators.maxLength(30)
+      ]],
+      password: ['', [Validators.required,
+        Validators.minLength(6)
+        
+      ]],
     });
   }
   //lodauser
