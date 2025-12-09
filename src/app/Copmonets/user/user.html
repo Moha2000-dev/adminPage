@@ -164,11 +164,19 @@
       />
 
       <input
+      
         formControlName="email"
         type="email"
         placeholder="email"
         class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
+        
       />
+      <div
+        *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+        class="text-red-500 text-sm"
+      >Please enter a valid email address.</div
+
+          >
 
       <input
         formControlName="password"

@@ -2,8 +2,8 @@ import { User as UserService } from './../../services/user';
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Console } from 'console';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { email } from '@angular/forms/signals';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { email, validate } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-user',
@@ -24,7 +24,17 @@ export class User {
   ngOnInit(): void {
     this.loadUsers();
     this.userForm = this.formBuilder.group({
-      email: [''],
+      email: ['',
+        [
+          // Validators.required,
+           Validators.required,
+           Validators.maxLength(50) // Example of another validator
+          
+
+          
+        ]
+      ],
+      
       username: [''],
       password: [''],
     });
@@ -85,6 +95,9 @@ export class User {
   }
   //save user
   saveUser() {
+    if (this.userForm.invalid) {
+      return;
+    }
     const formValue = this.userForm.value;
     const payload = {
       id: this.Userid,
