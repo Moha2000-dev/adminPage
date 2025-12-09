@@ -146,7 +146,7 @@
 
 <!-- Modal -->
 <div
-  *ngIf="modelOpen()" 
+  *ngIf="modelOpen()"
   class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50"
 >
   <div class="bg-white p-6 rounded-md shadow-2xl w-full max-w-md space-y-4">
@@ -157,31 +157,29 @@
     <form [formGroup]="userForm" class="space-y-3">
       <input
         type="text"
-
         placeholder="username"
         class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
         formControlName="username"
       />
       <div
         *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched"
-        class="text-red-500 text-sm"  
-      >Please enter a valid username.</div>
+        class="text-red-500 text-sm"
+      >
+        Please enter a valid username.
+      </div>
 
       <input
-      
         formControlName="email"
         type="email"
         placeholder="email"
         class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
-        
       />
       <div
         *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
         class="text-red-500 text-sm"
-
-      >Please enter a valid email address.</div
-
-          >
+      >
+        Please enter a valid email address.
+      </div>
 
       <input
         formControlName="password"
@@ -192,7 +190,9 @@
       <div
         *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched"
         class="text-red-500 text-sm"
-      >Please enter a valid password.</div>
+      >
+        Please enter a valid password.
+      </div>
 
       <div class="flex justify-end gap-2">
         <button
