@@ -2,22 +2,32 @@ import { User as UserService } from './../../services/user';
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Console } from 'console';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { email } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-user',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
 export class User {
-  
   users = signal<any[]>([]);
   isloading = signal<boolean>(false); //loading state
   userName: any;
   userEmail: any;
-  constructor(private userService: UserService) {}
+  modelOpen = signal(false);
+  editingUser = signal(false);
+  Userid: any = null;
+  userForm!: FormGroup;
+  constructor(private userService: UserService, private formBuilder: FormBuilder) {}
   ngOnInit(): void {
     this.loadUsers();
+    this.userForm = this.formBuilder.group({
+      email: [''],
+      username: [''],
+      password: [''],
+    });
   }
   //lodauser
   loadUsers() {
@@ -34,7 +44,7 @@ export class User {
       }
     );
   }
-
+  //delete user
   deleteUser(id: any) {
     if (confirm('Are you sure you want to delete this user?')) {
       this.isloading.set(true);
@@ -52,34 +62,77 @@ export class User {
       );
     }
   }
-  //edit user
-  editUser(id: number, userData: any) {
-    this.isloading.set(true);
-    this.userService.editUser(id, userData).subscribe(
-      (res: any) => {
-        console.log('Edited user response:', res);
-        this.loadUsers(); 
-        this.isloading.set(false);
-      },
-      (error) => {
-        console.error('Error editing user:', error);
-        this.isloading.set(false);
-      }
-    );
+  //open modal
+  openModal(user?: any) {
+    this.modelOpen.set(true);
+    if (user) {
+      this.editingUser.set(true);
+      this.Userid = user.id;
+      this.userForm.setValue({
+        email: user.email || '',
+        username: user.username || '',
+        password: user.password || '',
+      });
+    } else {
+      this.editingUser.set(false);
+      this.Userid = null;
+      this.userForm.reset();
+    }
   }
-  //add user
-  addUser(userData: any) {
-    this.isloading.set(true);
-    this.userService.addUser(userData).subscribe(
-      (res: any) => {
-        console.log('Added user response:', res);
-        this.loadUsers(); 
-        this.isloading.set(false);
-      },
-      (error) => {
-        console.error('Error adding user:', error);
-        this.isloading.set(false);
-      }
-    );  
+  //close modal
+  closeModal(user?: any) {
+    this.modelOpen.set(false);
+  }
+  //save user
+  saveUser() {
+    const formValue = this.userForm.value;
+    const payload = {
+      id: this.Userid,
+      email: formValue.email,
+      username: formValue.username,
+      password: formValue.password,
+    };
+    console.log('Payload:', payload);
+    if (this.editingUser()) {
+      this.userService.editUser(this.Userid, payload).subscribe(
+        (res: any) => {
+          this.users.update((currentUsers) => {
+            const index = currentUsers.findIndex((u) => u.id === this.Userid);
+            if (index !== -1) {
+              currentUsers[index] = res;
+            }
+            return currentUsers;
+          });
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Error editing user:', error);
+        }
+      );
+    } // ===============================
+    // CREATE USER (Add Mode)
+    // ===============================
+    else {
+      this.userService.addUser(payload).subscribe(
+        (createdUser: any) => {
+          // Add new user to the list
+          this.users.update((currentUsers) => [
+            ...currentUsers,
+            {
+              id: createdUser.id || 0,
+              username: formValue.username,
+              email: formValue.email,
+              password: formValue.password,
+            },
+          ]);
+
+          this.closeModal();
+        },
+        (err: any) => {
+          console.error('Create failed:', err);
+          alert(err.error?.message || 'Failed to create user');
+        }
+      );
+    }
   }
 }
