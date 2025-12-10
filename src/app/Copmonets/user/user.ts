@@ -1,3 +1,4 @@
+import { Permissions } from './../../services/permissions';
 import { User as UserService } from './../../services/user';
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,7 @@ export class User {
   editingUser = signal(false);
   Userid: any = null;
   userForm!: FormGroup;
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder, public permissions: Permissions) {}
   ngOnInit(): void {
     this.loadUsers();
     this.userForm = this.formBuilder.group({
