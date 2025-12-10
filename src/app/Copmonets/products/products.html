@@ -1,5 +1,4 @@
 <div class="p-12 space-y-6 bg-linear-to-br from-slate-50 via-indigo-50 to-purple-50 min-h-screen">
-  <!-- Title + Reload Button -->
   <div class="flex justify-between items-center mb-8 animate-fade-in">
     <div>
       <h2
@@ -9,30 +8,54 @@
       </h2>
       <p class="text-gray-600 text-sm">Browse, manage and remove products from the store</p>
     </div>
-    <button
-      (click)="loadProducts()"
-      class="group relative bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        viewBox="0 0 20 20"
-        fill="currentColor"
+
+    <div class="flex gap-3">
+      <button
+        (click)="loadProducts()"
+        class="group relative bg-linear-to-r from-slate-800 to-slate-900 text-white px-5 py-3 rounded-xl hover:from-slate-900 hover:to-black shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
       >
-        <path
-          fill-rule="evenodd"
-          d="M4 4a1 1 0 011-1h4a1 1 0 110 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V9a1 1 0 11-2 0V5a1 1 0 011-1zm12 6a1 1 0 00-1 1v3.586l-2.293-2.293a1 1 0 00-1.414 1.414L14.586 16H11a1 1 0 100 2h4a1 1 0 001-1v-4a1 1 0 00-1-1z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      Reload
-      <span
-        class="absolute inset-0 rounded-xl bg-white opacity-0 group-hover:opacity-20 transition-opacity"
-      ></span>
-    </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4 4a1 1 0 011-1h4a1 1 0 110 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V9a1 1 0 11-2 0V5a1 1 0 011-1zm12 6a1 1 0 00-1 1v3.586l-2.293-2.293a1 1 0 00-1.414 1.414L14.586 16H11a1 1 0 100 2h4a1 1 0 001-1v-4a1 1 0 00-1-1z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Reload
+        <span
+          class="absolute inset-0 rounded-xl bg-white opacity-0 group-hover:opacity-20 transition-opacity"
+        ></span>
+      </button>
+
+      <button
+        (click)="openModal()"
+        class="group relative bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Add Product
+        <span
+          class="absolute inset-0 rounded-xl bg-white opacity-0 group-hover:opacity-20 transition-opacity"
+        ></span>
+      </button>
+    </div>
   </div>
 
-  <!-- Loading Spinner -->
   <div *ngIf="isloading()" class="flex flex-col justify-center items-center py-24">
     <div class="relative">
       <div
@@ -45,7 +68,6 @@
     <p class="mt-4 text-gray-600 font-medium animate-pulse">Loading products...</p>
   </div>
 
-  <!-- Products Grid -->
   <div
     *ngIf="!isloading()"
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6"
@@ -54,17 +76,14 @@
       *ngFor="let item of products()"
       class="group bg-white p-6 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col relative overflow-hidden transform hover:-translate-y-1 border border-gray-100 hover:border-indigo-200"
     >
-      <!-- Decorative Background Pattern -->
       <div
         class="absolute inset-0 bg-linear-to-br from-indigo-50 via-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       ></div>
 
-      <!-- Animated Corner Accent -->
       <div
         class="absolute top-0 right-0 w-24 h-24 bg-linear-to-br from-indigo-400 to-purple-600 opacity-10 rounded-bl-full transform translate-x-12 -translate-y-12 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-300"
       ></div>
 
-      <!-- Product Image -->
       <div
         class="relative w-full h-40 mb-4 rounded-2xl bg-linear-to-br from-indigo-50 to-purple-50 flex items-center justify-center shadow-md group-hover:shadow-lg transform group-hover:scale-105 transition-all duration-300 z-10 overflow-hidden"
       >
@@ -75,7 +94,6 @@
         />
       </div>
 
-      <!-- Product Info -->
       <h3
         class="relative font-bold text-lg mb-2 text-gray-800 group-hover:text-indigo-700 transition-colors duration-300 z-10 line-clamp-2"
       >
@@ -95,15 +113,31 @@
         </span>
       </div>
 
-      <!-- Description -->
       <p
         class="relative text-sm text-gray-600 mb-4 z-10 line-clamp-3 group-hover:text-gray-700 transition-colors duration-300"
       >
         {{ item.description | slice : 0 : 120 }}{{ item.description?.length > 120 ? '...' : '' }}
       </p>
 
-      <!-- Actions -->
       <div class="relative flex gap-3 mt-auto w-full z-10">
+        <button
+          (click)="openModal(item)"
+          class="flex-1 bg-linear-to-r from-amber-500 to-orange-500 text-white px-4 py-2 rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 font-medium flex items-center justify-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+            />
+          </svg>
+          Edit
+        </button>
+
+        
         <button
           (click)="deleteProduct(item.id)"
           class="flex-1 bg-linear-to-r from-rose-500 to-red-600 text-white px-4 py-2 rounded-xl hover:from-rose-600 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 font-medium flex items-center justify-center gap-2"
@@ -124,6 +158,90 @@
         </button>
       </div>
     </div>
+  </div>
+</div>
+
+<div
+  *ngIf="modelOpen()"
+  class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50"
+>
+  <div class="bg-white p-6 rounded-md shadow-2xl w-full max-w-md space-y-4">
+    <h2 class="text-xl font-bold mb-4 text-indigo-700">
+      {{ editingProduct() ? 'Edit Product' : 'Add Product' }}
+    </h2>
+
+    <form [formGroup]="productForm" class="space-y-3">
+      <input
+        type="text"
+        placeholder="Product title"
+        class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
+        formControlName="title"
+      />
+      <div
+        *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched"
+        class="text-red-500 text-sm"
+      >
+        Please enter a valid title.
+      </div>
+
+      <input
+        type="number"
+        placeholder="Price"
+        class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
+        formControlName="price"
+      />
+      <div
+        *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+        class="text-red-500 text-sm"
+      >
+        Please enter a valid price.
+      </div>
+
+      <input
+        type="text"
+        placeholder="Category"
+        class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
+        formControlName="category"
+      />
+      <div
+        *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+        class="text-red-500 text-sm"
+      >
+        Please enter a valid category.
+      </div>
+
+      <textarea
+        rows="3"
+        placeholder="Description"
+        class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
+        formControlName="description"
+      ></textarea>
+
+      <input
+        type="text"
+        placeholder="Image URL"
+        class="w-full border-2 border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200 p-2 rounded-lg"
+        formControlName="image"
+      />
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button
+          type="button"
+          class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          (click)="saveProduct()"
+          type="submit"
+          class="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+        >
+          Save
+        </button>
+      </div>
+    </form>
   </div>
 </div>
 

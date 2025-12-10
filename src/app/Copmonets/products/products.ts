@@ -1,4 +1,3 @@
-
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,7 +15,6 @@ export class ProductsComponent {
   products = signal<any[]>([]);
   isloading = signal<boolean>(false);
 
-  // modal & form state مثل الـ User
   modelOpen = signal(false);
   editingProduct = signal(false);
   productId: any = null;
@@ -31,14 +29,15 @@ export class ProductsComponent {
     this.loadProducts();
 
     this.productForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
+      title: ['', [Validators.required, Validators.maxLength(100)]],
       price: [0, [Validators.required, Validators.min(0)]],
+      category: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.maxLength(255)]],
-      stock: [0, [Validators.required, Validators.min(0)]],
+      image: ['', [Validators.required]],
     });
   }
 
- 
+
   loadProducts() {
     this.isloading.set(true);
     this.productsService.getProducts().subscribe(
@@ -59,47 +58,53 @@ export class ProductsComponent {
     this.modelOpen.set(true);
 
     if (product) {
+   
       this.editingProduct.set(true);
       this.productId = product.id;
 
       this.productForm.setValue({
-        name: product.name || '',
+        title: product.title || '',
         price: product.price || 0,
+        category: product.category || '',
         description: product.description || '',
-        stock: product.stock || 0,
+        image: product.image || '',
       });
     } else {
-      // Add mode
+  
       this.editingProduct.set(false);
       this.productId = null;
       this.productForm.reset({
-        name: '',
+        title: '',
         price: 0,
+        category: '',
         description: '',
-        stock: 0,
+        image: '',
       });
     }
   }
 
-
+ 
   closeModal() {
     this.modelOpen.set(false);
   }
 
-
+ 
   saveProduct() {
     if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
       return;
     }
 
     const formValue = this.productForm.value;
 
+    
     const payload = {
       id: this.productId,
-      name: formValue.name,
+      title: formValue.title,
       price: formValue.price,
+      category: formValue.category,
       description: formValue.description,
-      stock: formValue.stock,
+      image: formValue.image,
     };
 
     console.log('Product payload:', payload);
@@ -112,6 +117,7 @@ export class ProductsComponent {
             if (index !== -1) {
               currentProducts[index] = res;
             }
+          
             return [...currentProducts];
           });
 
@@ -123,7 +129,7 @@ export class ProductsComponent {
         }
       );
     }
-    
+
     else {
       this.productsService.addProduct(payload).subscribe(
         (createdProduct: any) => {
