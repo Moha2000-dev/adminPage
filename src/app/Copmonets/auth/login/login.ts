@@ -33,6 +33,7 @@ showPassword: any;
         localStorage.setItem('token', res.token);
         this.router.navigate(['/user']);
         sessionStorage.setItem('username_sessions', this.usernames);
+        
       },
         (err: any) => {
         console.log(err);
