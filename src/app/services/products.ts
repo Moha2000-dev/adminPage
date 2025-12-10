@@ -27,4 +27,22 @@ export class Products {
       })
     );
   }
+  //ADD product
+  addProduct(productData: any) {
+    return this.http.post(this.base, productData).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  }
+  //edit product
+  editProduct(id: number, productData: any) {
+    return this.http.put(`${this.base}/${id}`, productData).pipe(
+      map((data) => data),
+      catchError((error) => {
+        throw 'Error in source. Details: ' + error;
+      })
+    );
+  }
 }
