@@ -24,25 +24,18 @@ export class User {
   ngOnInit(): void {
     this.loadUsers();
     this.userForm = this.formBuilder.group({
-      email: ['',
+      email: [
+        '',
         [
           // Validators.required,
-           Validators.required,
-           Validators.maxLength(50) // Example of another validator
-            , Validators.email
-          
-
-          
-        ]
+          Validators.required,
+          Validators.maxLength(50), // Example of another validator
+          Validators.email,
+        ],
       ],
-      
-      username: ['', [Validators.required,
-        Validators.maxLength(30)
-      ]],
-      password: ['', [Validators.required,
-        Validators.minLength(6)
-        
-      ]],
+
+      username: ['', [Validators.required, Validators.maxLength(30)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
   //lodauser
