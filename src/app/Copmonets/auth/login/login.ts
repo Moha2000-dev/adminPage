@@ -27,12 +27,14 @@ showPassword: any;
     console.log(this.usernames, this.passwords);
     const data = { username: this.usernames, password: this.passwords };
     this.auth.login(data).subscribe(
-      (res) => {
+      (res: any) => {
         console.log(res);
         this.isloading = false;
+        localStorage.setItem('token', res.token);
         this.router.navigate(['/user']);
+        sessionStorage.setItem('username_sessions', this.usernames);
       },
-        (err) => {
+        (err: any) => {
         console.log(err);
         this.isloading = false;
         this.errormsg = 'Invalid username or password';
