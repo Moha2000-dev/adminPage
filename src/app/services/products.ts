@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +43,12 @@ export class Products {
       catchError((error) => {
         throw 'Error in source. Details: ' + error;
       })
+    );
+  }
+  updateProduct(id: number, prod: any) {
+    return this.http.put(`${this.base}/${id}`, prod).pipe(
+      map((data: any) => data),
+      catchError((error) => throwError(() => error))
     );
   }
 }

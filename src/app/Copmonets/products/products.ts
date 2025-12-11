@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { Permissions } from './../../services/permissions';
 import { Products as ProductsService } from './../../services/products';
 
 @Component({
@@ -11,18 +11,20 @@ import { Products as ProductsService } from './../../services/products';
   templateUrl: './products.html',
   styleUrls: ['./products.css'],
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   products = signal<any[]>([]);
   isloading = signal<boolean>(false);
 
+  // modal & form state
   modelOpen = signal(false);
   editingProduct = signal(false);
-  productId: any = null;
+  productId: number | null = null;
   productForm!: FormGroup;
 
   constructor(
     private productsService: ProductsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public permissions: Permissions
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,6 @@ export class ProductsComponent {
       image: ['', [Validators.required]],
     });
   }
-
 
   loadProducts() {
     this.isloading.set(true);
@@ -53,12 +54,10 @@ export class ProductsComponent {
     );
   }
 
-
   openModal(product?: any) {
     this.modelOpen.set(true);
 
     if (product) {
-   
       this.editingProduct.set(true);
       this.productId = product.id;
 
@@ -70,7 +69,6 @@ export class ProductsComponent {
         image: product.image || '',
       });
     } else {
-  
       this.editingProduct.set(false);
       this.productId = null;
       this.productForm.reset({
@@ -83,12 +81,11 @@ export class ProductsComponent {
     }
   }
 
- 
   closeModal() {
     this.modelOpen.set(false);
+    this.productForm.reset();
   }
 
- 
   saveProduct() {
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
@@ -97,7 +94,6 @@ export class ProductsComponent {
 
     const formValue = this.productForm.value;
 
-    
     const payload = {
       id: this.productId,
       title: formValue.title,
@@ -110,14 +106,14 @@ export class ProductsComponent {
     console.log('Product payload:', payload);
 
     if (this.editingProduct()) {
-      this.productsService.editProduct(this.productId, payload).subscribe(
+      // استخدام editProduct من السيرفس
+      this.productsService.editProduct(this.productId!, payload).subscribe(
         (res: any) => {
           this.products.update((currentProducts) => {
             const index = currentProducts.findIndex((p) => p.id === this.productId);
             if (index !== -1) {
               currentProducts[index] = res;
             }
-          
             return [...currentProducts];
           });
 
@@ -128,15 +124,10 @@ export class ProductsComponent {
           alert(error.error?.message || 'Failed to edit product');
         }
       );
-    }
-
-    else {
+    } else {
       this.productsService.addProduct(payload).subscribe(
         (createdProduct: any) => {
-          this.products.update((currentProducts) => [
-            ...currentProducts,
-            createdProduct,
-          ]);
+          this.products.update((currentProducts) => [...currentProducts, createdProduct]);
           this.closeModal();
         },
         (err: any) => {
@@ -146,7 +137,6 @@ export class ProductsComponent {
       );
     }
   }
-
 
   deleteProduct(id: number) {
     if (confirm('Are you sure you want to delete this product?')) {
