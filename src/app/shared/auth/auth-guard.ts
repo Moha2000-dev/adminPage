@@ -19,7 +19,7 @@ export class AuthenticationGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['unauthorized']);
+    this.router.navigate(['Unauth']);
     return false;
   }
 }

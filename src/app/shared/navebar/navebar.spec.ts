@@ -8,9 +8,8 @@ describe('Navebar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Navebar]
-    })
-    .compileComponents();
+      imports: [Navebar],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Navebar);
     component = fixture.componentInstance;

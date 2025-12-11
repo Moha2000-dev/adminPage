@@ -1,13 +1,30 @@
-<div class="flex flex-col items-center justify-center gap-12 py-8">
-  <img src="icon.svg" alt="" class="h-[50vh] aspect-video" />
+<div class="min-h-screen flex flex-col items-center justify-center bg-linear-to-b from-blue-100 to-yellow-100 p-6">
+  <div class="flex flex-col items-center text-center gap-6 max-w-xl">
 
-  <div class="flex flex-col items-center gap-4">
-    <h1 class="text-3xl font-medium text-center">Access Restricted</h1>
+    <!-- Image -->
+    <img 
+      src="icon.png" 
+      alt="Access Restricted" 
+      class="w-48 h-auto object-contain drop-shadow-md"
+    />
 
-    <p class="text-xl text-center">
-      You do not have the required permissions to view this content. <br />
+    <!-- Title -->
+    <h2 class="text-3xl font-semibold text-gray-800">
+      Access Restricted
+    </h2>
+
+    <!-- Message -->
+    <p class="text-lg text-gray-700 leading-relaxed">
+      You do not have the necessary permissions to view this content.<br />
       Please contact your administrator for access.
-      <a href="#" class="text-xl text-bold text-cyan-500">Try Again</a>
     </p>
+
+    <!-- Link -->
+    <a 
+      href="#" 
+      class="text-xl font-bold text-cyan-600 hover:text-cyan-800 hover:underline transition"
+    >
+      Try Again
+    </a>
   </div>
 </div>
