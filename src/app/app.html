@@ -1,5 +1,5 @@
 <!--navbare-->
 <app-navebar *ngIf="route.url !== '/login'"></app-navebar>
-<div class="bg-linear-to-tl from-gray-100 via-blue-300 to-red-200 min-h-screen">
+<div  [dir]="languageService.isRtl?'rtl':'ltr' " class="bg-linear-to-tl from-gray-100 via-blue-300 to-red-200 min-h-screen">
   <router-outlet></router-outlet>
 </div>

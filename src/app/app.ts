@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Navebar } from "./shared/navebar/navebar";
 import { CommonModule } from '@angular/common';
+import { Language } from './services/language';
 
 
 
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class App {
   protected readonly title = signal('adminPage');
-  constructor(public route:Router) {
+  constructor(public route:Router,public languageService:Language) {
   }
 
 
