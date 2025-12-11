@@ -7,15 +7,14 @@ type Lang = 'en' | 'ar';
   providedIn: 'root',
 })
 export class Language {
-
-   private langSubject: BehaviorSubject<Lang>;
+  private langSubject: BehaviorSubject<Lang>;
   lang$;
 
   constructor() {
     // check if localStorage exists (browser environment)
     const savedLang: Lang =
       typeof window !== 'undefined' && window.localStorage
-        ? ((localStorage.getItem('lang') as Lang) || 'en')
+        ? (localStorage.getItem('lang') as Lang) || 'en'
         : 'en';
 
     this.langSubject = new BehaviorSubject<Lang>(savedLang);
@@ -38,7 +37,4 @@ export class Language {
   get isRtl() {
     return this.langSubject.value === 'ar';
   }
-
-  
-  
 }
