@@ -1,24 +1,49 @@
 {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+  "LOGIN": "Login",
+  "USERNAME": "Username",
+  "PASSWORD": "Password",
+  "EMAIL": "Email",
+  "SHARED": {
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "LOADING": "Loading...",
+    "CANCEL": "Cancel",
+    "SAVE": "Save"
+  },
+  "USERS": "Users",
+  "PRODUCTS": "Products",
+  "LOGOUT": "Logout",
+  "PRODUCTS_CONTENT": {
+    "ADD_PRODUCT": "Add Product",
+    "PRODUCTS_LIST": "Products list"
+  },
+  "USERS_CONTENT": {
+    "ADD_USER": "Add User",
+    "EDIT_USER": "Edit User",
+    "USERS_LIST": "Users list"
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+{
+  "LOGIN": "تسجيل الدخول",
+  "USERNAME": "اسم المستخدم",
+  "PASSWORD": "كلمة المرور",
+  "EMAIL": "البريد الإلكتروني",
+  "SHARED": {
+    "DELETE": "حذف",
+    "EDIT": "تعديل",
+    "LOADING": "جار التحميل...",
+    "CANCEL": "إلغاء"
+  },
+  "USERS": "المستخدمين",
+  "PRODUCTS": "المنتجات",
+  "LOGOUT": "تسجيل الخروج",
+  "PRODUCTS_CONTENT": {
+    "ADD_PRODUCT": "إضافة منتج",
+    "PRODUCTS_LIST": "قائمة المنتجات"
+  },
+  "USERS_CONTENT": {
+    "ADD_USER": "إضافة مستخدم",
+    "EDIT_USER": "تعديل بيانات المستخدم",
+    "USERS_LIST": "قائمة المستخدمين"
+  }
+}
